@@ -32,7 +32,7 @@
             this.impassableCheckBox = new System.Windows.Forms.CheckBox();
             this.spriteXUpDown = new System.Windows.Forms.NumericUpDown();
             this.animationOrderLabel = new System.Windows.Forms.Label();
-            this.aimationOrderTextBox = new System.Windows.Forms.TextBox();
+            this.animationOrderTextBox = new System.Windows.Forms.TextBox();
             this.addButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
@@ -73,9 +73,9 @@
             this.animaitedCheckBox.Location = new System.Drawing.Point(179, 200);
             this.animaitedCheckBox.Name = "animaitedCheckBox";
             this.animaitedCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.animaitedCheckBox.Size = new System.Drawing.Size(66, 17);
+            this.animaitedCheckBox.Size = new System.Drawing.Size(70, 17);
             this.animaitedCheckBox.TabIndex = 7;
-            this.animaitedCheckBox.Text = "Aimaited";
+            this.animaitedCheckBox.Text = "Animated";
             this.animaitedCheckBox.UseVisualStyleBackColor = true;
             this.animaitedCheckBox.CheckedChanged += new System.EventHandler(this.animaitedCheckBox_CheckedChanged);
             // 
@@ -116,15 +116,15 @@
             this.animationOrderLabel.TabIndex = 6;
             this.animationOrderLabel.Text = "Animation Order";
             // 
-            // aimationOrderTextBox
+            // animationOrderTextBox
             // 
-            this.aimationOrderTextBox.Enabled = false;
-            this.aimationOrderTextBox.Location = new System.Drawing.Point(179, 225);
-            this.aimationOrderTextBox.Name = "aimationOrderTextBox";
-            this.aimationOrderTextBox.Size = new System.Drawing.Size(120, 20);
-            this.aimationOrderTextBox.TabIndex = 8;
-            this.aimationOrderTextBox.TextChanged += new System.EventHandler(this.aimationOrderTextBox_TextChanged);
-            this.aimationOrderTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.aimationOrderTextBox_KeyDown);
+            this.animationOrderTextBox.Enabled = false;
+            this.animationOrderTextBox.Location = new System.Drawing.Point(179, 225);
+            this.animationOrderTextBox.Name = "animationOrderTextBox";
+            this.animationOrderTextBox.Size = new System.Drawing.Size(120, 20);
+            this.animationOrderTextBox.TabIndex = 8;
+            this.animationOrderTextBox.TextChanged += new System.EventHandler(this.aimationOrderTextBox_TextChanged);
+            this.animationOrderTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.aimationOrderTextBox_KeyDown);
             // 
             // addButton
             // 
@@ -324,7 +324,7 @@
             this.Controls.Add(this.removeButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.addButton);
-            this.Controls.Add(this.aimationOrderTextBox);
+            this.Controls.Add(this.animationOrderTextBox);
             this.Controls.Add(this.animationOrderLabel);
             this.Controls.Add(this.spriteXUpDown);
             this.Controls.Add(this.impassableCheckBox);
@@ -352,7 +352,7 @@
         private System.Windows.Forms.CheckBox impassableCheckBox;
         private System.Windows.Forms.NumericUpDown spriteXUpDown;
         private System.Windows.Forms.Label animationOrderLabel;
-        private System.Windows.Forms.TextBox aimationOrderTextBox;
+        private System.Windows.Forms.TextBox animationOrderTextBox;
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button removeButton;

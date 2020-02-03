@@ -62,6 +62,7 @@ namespace TerrainTypeBuilder
 
         private void setFields()
         {
+            ignoreEvents = true;
             if (entity != null) {
                 nameTextBox.Text = entity.Type;
                 nameTextBox.Enabled = true;
@@ -82,30 +83,31 @@ namespace TerrainTypeBuilder
                 if (entity.animaited) {
                     animaitedCheckBox.Checked = true;
                     for (int i = 0; i < entity.animationSequence.Count(); i++) {
-                        if (i < entity.animationSequence.Count() - 1)
-                            aimationOrderTextBox.Text += entity.animationSequence[i];
+                        if (i == entity.animationSequence.Count() - 1)
+                            animationOrderTextBox.Text += entity.animationSequence[i];
                         else
-                            aimationOrderTextBox.Text += entity.animationSequence[i] + ",";
+                            animationOrderTextBox.Text += entity.animationSequence[i] + ",";
                     }
                 } else {
                     animaitedCheckBox.Checked = false;
-                    aimationOrderTextBox.Text = String.Empty;
-                    aimationOrderTextBox.Enabled = false;
+                    animationOrderTextBox.Text = String.Empty;
+                    animationOrderTextBox.Enabled = false;
                 }
                 animaitedCheckBox.Enabled = true;
             }
+            ignoreEvents = false;
         }
 
         private void animaitedCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if(animaitedCheckBox.Checked)
             {
-                aimationOrderTextBox.Enabled = true;   
+                animationOrderTextBox.Enabled = true;   
             }
             else
             {
-                aimationOrderTextBox.Enabled = false;
-                aimationOrderTextBox.Text = String.Empty;
+                animationOrderTextBox.Enabled = false;
+                animationOrderTextBox.Text = String.Empty;
             }
             entity.animaited = animaitedCheckBox.Checked;
             changed = true;
@@ -127,7 +129,7 @@ namespace TerrainTypeBuilder
         {
             entity = new TerrainType();
             types.Add(entity);
-            typesListBox.Items.Add(new TerrainType(entity));
+            typesListBox.Items.Add(entity.Type);
             typesListBox.SelectedIndex = typesListBox.Items.Count - 1;
             index = typesListBox.Items.Count - 1;
         }
@@ -167,22 +169,22 @@ namespace TerrainTypeBuilder
                 return;
             bool valid = true;
             Regex validator = new Regex("^[0-9]+$");
-            string[] parts = aimationOrderTextBox.Text.Split(',');
+            string[] parts = animationOrderTextBox.Text.Split(',');
             for(int i = 0; i < parts.Count(); i++) {
                 Console.WriteLine(validator.Match(parts[i]).Success);
                 if(!validator.Match(parts[i].Trim()).Success) {
                     valid = false;
-                    aimationOrderTextBox.BackColor = Color.LightPink;
+                    animationOrderTextBox.BackColor = Color.LightPink;
                 } 
             }
             this.valid = valid;
             if(valid) {
                 String cleanedString = "";
-                aimationOrderTextBox.BackColor = Color.White;
-                entity.animationSequence = new int[parts.Count()];
+                animationOrderTextBox.BackColor = Color.White;
+                entity.animationSequence = new List<int>(parts.Count());
                 for (int i = 0; i < parts.Count(); i++) {
 
-                    entity.animationSequence[i] = int.Parse(parts[i].Trim());
+                    entity.animationSequence.Add(int.Parse(parts[i].Trim()));
 
                     if(i == parts.Count() -1) {
                         cleanedString += parts[i].Trim();
@@ -191,9 +193,9 @@ namespace TerrainTypeBuilder
                     }
 
                     ignoreEvents = true;
-                    aimationOrderTextBox.Text = cleanedString;
-                    aimationOrderTextBox.SelectionStart = aimationOrderTextBox.Text.Length;
-                    aimationOrderTextBox.SelectionLength = 0;
+                    animationOrderTextBox.Text = cleanedString;
+                    animationOrderTextBox.SelectionStart = animationOrderTextBox.Text.Length;
+                    animationOrderTextBox.SelectionLength = 0;
                     ignoreEvents = false;
                     
                 }
@@ -221,7 +223,7 @@ namespace TerrainTypeBuilder
             if(valid) {
                 ignoreEvents = true;
                 types[index] = new TerrainType(entity);
-                typesListBox.Items[index] = types[index];
+                typesListBox.Items[index] = types[index].Type;
                 ignoreEvents = false;
                 changed = false;
             }
@@ -234,9 +236,33 @@ namespace TerrainTypeBuilder
             serializer.Serialize(sw, types);
         }
 
+        public void Deserialize(String path)
+        {
+            XmlSerializer deserializer = new XmlSerializer(typeof(List<TerrainType>));
+            TextReader reader = new StreamReader(path);
+            object obj = deserializer.Deserialize(reader);
+            List<TerrainType> loadedTypes = (List<TerrainType>)obj;
+            resetTypes(loadedTypes);
+            reader.Close();
+        }
+
+        public void resetTypes(List<TerrainType> loadedTypes)
+        {
+            ignoreEvents = true;
+            types.Clear();
+            typesListBox.Items.Clear();
+            foreach(TerrainType t in loadedTypes)
+            {
+                types.Add(new TerrainType(t));
+                typesListBox.Items.Add(new TerrainType(t).Type);
+            }
+            ignoreEvents = false;
+            index = 0;
+            typesListBox.SelectedIndex = 0;
+        }
+
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            String path;
             SaveFileDialog fd = new SaveFileDialog();
 
             if(fd.ShowDialog() == DialogResult.OK)
@@ -247,7 +273,10 @@ namespace TerrainTypeBuilder
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            OpenFileDialog fd = new OpenFileDialog();
+            if (fd.ShowDialog() == DialogResult.OK)
+                Deserialize(fd.FileName);
+                
         }
     }
 }

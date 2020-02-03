@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Xml.Serialization;
+using System.Xml;
 namespace TerrainTypeBuilder
 {
     public class TerrainType
@@ -16,7 +17,7 @@ namespace TerrainTypeBuilder
         public int spriteSize { get; set; }
         public bool impassable { get; set; }
         public bool animaited { get; set; }
-        public int[] animationSequence { get; set; }
+        public List<int> animationSequence { get; set; }
 
         public int movementCost { get; set; }
 
@@ -41,9 +42,9 @@ namespace TerrainTypeBuilder
             this.impassable = original.impassable;
             this.animaited = original.animaited;
             if (animaited) {
-                this.animationSequence = new int[original.animationSequence.Count()];
-                for (int i = 0; i < animationSequence.Count(); i++)
-                    animationSequence[i] = original.animationSequence[i];
+                this.animationSequence = new List<int>(original.animationSequence.Count());
+                foreach (int i in original.animationSequence)
+                    animationSequence.Add(i);
             }
             this.animationSequence = original.animationSequence;
             this.movementCost = original.movementCost;
