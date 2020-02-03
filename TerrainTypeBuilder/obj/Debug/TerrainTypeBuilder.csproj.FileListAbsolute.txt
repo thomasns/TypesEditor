@@ -7,3 +7,12 @@ c:\users\oorah\documents\visual studio 2015\Projects\TerrainTypeBuilder\TerrainT
 c:\users\oorah\documents\visual studio 2015\Projects\TerrainTypeBuilder\TerrainTypeBuilder\obj\Debug\TerrainTypeBuilder.csproj.GenerateResource.Cache
 c:\users\oorah\documents\visual studio 2015\Projects\TerrainTypeBuilder\TerrainTypeBuilder\obj\Debug\TerrainTypeBuilder.exe
 c:\users\oorah\documents\visual studio 2015\Projects\TerrainTypeBuilder\TerrainTypeBuilder\obj\Debug\TerrainTypeBuilder.pdb
+C:\Users\thoma\Documents\Git\TypesEditor\TerrainTypeBuilder\bin\Debug\TerrainTypeBuilder.exe.config
+C:\Users\thoma\Documents\Git\TypesEditor\TerrainTypeBuilder\bin\Debug\TerrainTypeBuilder.exe
+C:\Users\thoma\Documents\Git\TypesEditor\TerrainTypeBuilder\bin\Debug\TerrainTypeBuilder.pdb
+C:\Users\thoma\Documents\Git\TypesEditor\TerrainTypeBuilder\obj\Debug\TerrainTypeBuilder.csprojAssemblyReference.cache
+C:\Users\thoma\Documents\Git\TypesEditor\TerrainTypeBuilder\obj\Debug\TerrainTypeBuilder.Form1.resources
+C:\Users\thoma\Documents\Git\TypesEditor\TerrainTypeBuilder\obj\Debug\TerrainTypeBuilder.Properties.Resources.resources
+C:\Users\thoma\Documents\Git\TypesEditor\TerrainTypeBuilder\obj\Debug\TerrainTypeBuilder.csproj.GenerateResource.cache
+C:\Users\thoma\Documents\Git\TypesEditor\TerrainTypeBuilder\obj\Debug\TerrainTypeBuilder.exe
+C:\Users\thoma\Documents\Git\TypesEditor\TerrainTypeBuilder\obj\Debug\TerrainTypeBuilder.pdb

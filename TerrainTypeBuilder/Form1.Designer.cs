@@ -46,7 +46,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.movementCostUpDown = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,7 +74,7 @@
             this.animaitedCheckBox.Name = "animaitedCheckBox";
             this.animaitedCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.animaitedCheckBox.Size = new System.Drawing.Size(66, 17);
-            this.animaitedCheckBox.TabIndex = 1;
+            this.animaitedCheckBox.TabIndex = 7;
             this.animaitedCheckBox.Text = "Aimaited";
             this.animaitedCheckBox.UseVisualStyleBackColor = true;
             this.animaitedCheckBox.CheckedChanged += new System.EventHandler(this.animaitedCheckBox_CheckedChanged);
@@ -103,7 +103,7 @@
             0});
             this.spriteXUpDown.Name = "spriteXUpDown";
             this.spriteXUpDown.Size = new System.Drawing.Size(120, 20);
-            this.spriteXUpDown.TabIndex = 3;
+            this.spriteXUpDown.TabIndex = 4;
             this.spriteXUpDown.ValueChanged += new System.EventHandler(this.spriteXUpDown_ValueChanged);
             // 
             // animationOrderLabel
@@ -122,7 +122,7 @@
             this.aimationOrderTextBox.Location = new System.Drawing.Point(179, 225);
             this.aimationOrderTextBox.Name = "aimationOrderTextBox";
             this.aimationOrderTextBox.Size = new System.Drawing.Size(120, 20);
-            this.aimationOrderTextBox.TabIndex = 7;
+            this.aimationOrderTextBox.TabIndex = 8;
             this.aimationOrderTextBox.TextChanged += new System.EventHandler(this.aimationOrderTextBox_TextChanged);
             this.aimationOrderTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.aimationOrderTextBox_KeyDown);
             // 
@@ -131,7 +131,7 @@
             this.addButton.Location = new System.Drawing.Point(12, 309);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(120, 23);
-            this.addButton.TabIndex = 8;
+            this.addButton.TabIndex = 9;
             this.addButton.Text = "Add";
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
@@ -141,7 +141,7 @@
             this.saveButton.Location = new System.Drawing.Point(12, 338);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(120, 23);
-            this.saveButton.TabIndex = 9;
+            this.saveButton.TabIndex = 10;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
@@ -151,7 +151,7 @@
             this.removeButton.Location = new System.Drawing.Point(12, 367);
             this.removeButton.Name = "removeButton";
             this.removeButton.Size = new System.Drawing.Size(120, 23);
-            this.removeButton.TabIndex = 10;
+            this.removeButton.TabIndex = 11;
             this.removeButton.Text = "Remove";
             this.removeButton.UseVisualStyleBackColor = true;
             // 
@@ -161,7 +161,7 @@
             this.nameTextBox.Location = new System.Drawing.Point(179, 35);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(120, 20);
-            this.nameTextBox.TabIndex = 12;
+            this.nameTextBox.TabIndex = 1;
             this.nameTextBox.TextChanged += new System.EventHandler(this.nameTextBox_TextChanged);
             // 
             // nameLabel
@@ -202,7 +202,7 @@
             0});
             this.spriteYUpDown.Name = "spriteYUpDown";
             this.spriteYUpDown.Size = new System.Drawing.Size(120, 20);
-            this.spriteYUpDown.TabIndex = 16;
+            this.spriteYUpDown.TabIndex = 5;
             this.spriteYUpDown.ValueChanged += new System.EventHandler(this.spriteYUpDown_ValueChanged);
             // 
             // label7
@@ -225,7 +225,7 @@
             0});
             this.spriteSizeUpDown.Name = "spriteSizeUpDown";
             this.spriteSizeUpDown.Size = new System.Drawing.Size(120, 20);
-            this.spriteSizeUpDown.TabIndex = 18;
+            this.spriteSizeUpDown.TabIndex = 6;
             this.spriteSizeUpDown.Value = new decimal(new int[] {
             15,
             0,
@@ -258,7 +258,7 @@
             0});
             this.movementCostUpDown.Name = "movementCostUpDown";
             this.movementCostUpDown.Size = new System.Drawing.Size(120, 20);
-            this.movementCostUpDown.TabIndex = 20;
+            this.movementCostUpDown.TabIndex = 3;
             this.movementCostUpDown.Value = new decimal(new int[] {
             1,
             0,
@@ -268,9 +268,8 @@
             // 
             // menuStrip1
             // 
-            this.menuStrip1.Enabled = false;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.menuStrip});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(399, 24);
@@ -278,27 +277,29 @@
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
-            // fileToolStripMenuItem
+            // menuStrip
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrip.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(37, 20);
+            this.menuStrip.Text = "File";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
@@ -365,7 +366,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown movementCostUpDown;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuStrip;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;

@@ -8,12 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Xml.Serialization;
+using System.Xml;
+using System.IO;
 
 namespace TerrainTypeBuilder
 {
     public partial class Form1 : Form
     {
-        List<TerrainType> types;
+        public List<TerrainType> types;
         TerrainType entity;
         bool changed;
         bool valid;
@@ -87,7 +90,7 @@ namespace TerrainTypeBuilder
                 } else {
                     animaitedCheckBox.Checked = false;
                     aimationOrderTextBox.Text = String.Empty;
-                    animaitedCheckBox.Enabled = false;
+                    aimationOrderTextBox.Enabled = false;
                 }
                 animaitedCheckBox.Enabled = true;
             }
@@ -95,25 +98,38 @@ namespace TerrainTypeBuilder
 
         private void animaitedCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (((CheckBox)sender).Checked) {
-                aimationOrderTextBox.Enabled = true;
-            } else {
+            if(animaitedCheckBox.Checked)
+            {
+                aimationOrderTextBox.Enabled = true;   
+            }
+            else
+            {
                 aimationOrderTextBox.Enabled = false;
                 aimationOrderTextBox.Text = String.Empty;
             }
-            entity.animaited = true;
+            entity.animaited = animaitedCheckBox.Checked;
             changed = true;
             saveButton.Enabled = true; 
         }
 
         private void addButton_Click(object sender, EventArgs e)
         {
+            if (changed)
+            {
+                if (entity != null && MessageBox.Show("Are you sure you want to discard your changes?", "Discard", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    addNewType();
+            }
+            else
+                addNewType();
+        }
+
+        private void addNewType()
+        {
             entity = new TerrainType();
             types.Add(entity);
-            typesListBox.Items.Add(entity);
+            typesListBox.Items.Add(new TerrainType(entity));
             typesListBox.SelectedIndex = typesListBox.Items.Count - 1;
             index = typesListBox.Items.Count - 1;
-            
         }
 
         private void nameTextBox_TextChanged(object sender, EventArgs e)
@@ -207,7 +223,31 @@ namespace TerrainTypeBuilder
                 types[index] = new TerrainType(entity);
                 typesListBox.Items[index] = types[index];
                 ignoreEvents = false;
+                changed = false;
             }
+        }
+
+        public void Serialize(String path)
+        {
+            StreamWriter sw = new StreamWriter(path);
+            XmlSerializer serializer = new XmlSerializer(typeof(List<TerrainType>));
+            serializer.Serialize(sw, types);
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            String path;
+            SaveFileDialog fd = new SaveFileDialog();
+
+            if(fd.ShowDialog() == DialogResult.OK)
+            {
+                Serialize(fd.FileName);
+            }
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

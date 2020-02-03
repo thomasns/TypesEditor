@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TerrainTypeBuilder
 {
-    class TerrainType
+    public class TerrainType
     {
         public string Type { get; set; }
 
