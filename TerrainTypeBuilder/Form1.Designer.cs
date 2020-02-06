@@ -50,6 +50,7 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.neighborsButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.spriteXUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spriteYUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spriteSizeUpDown)).BeginInit();
@@ -290,28 +291,40 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
+            // 
+            // neighborsButton
+            // 
+            this.neighborsButton.Enabled = false;
+            this.neighborsButton.Location = new System.Drawing.Point(179, 251);
+            this.neighborsButton.Name = "neighborsButton";
+            this.neighborsButton.Size = new System.Drawing.Size(75, 23);
+            this.neighborsButton.TabIndex = 23;
+            this.neighborsButton.Text = "Optional Sprites";
+            this.neighborsButton.UseVisualStyleBackColor = true;
+            this.neighborsButton.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(399, 413);
+            this.Controls.Add(this.neighborsButton);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.movementCostUpDown);
             this.Controls.Add(this.label7);
@@ -370,6 +383,7 @@
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
+        private System.Windows.Forms.Button neighborsButton;
     }
 }
 

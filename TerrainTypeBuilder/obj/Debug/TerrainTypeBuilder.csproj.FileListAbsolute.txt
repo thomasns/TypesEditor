@@ -16,3 +16,4 @@ C:\Users\thoma\Documents\Git\TypesEditor\TerrainTypeBuilder\obj\Debug\TerrainTyp
 C:\Users\thoma\Documents\Git\TypesEditor\TerrainTypeBuilder\obj\Debug\TerrainTypeBuilder.csproj.GenerateResource.cache
 C:\Users\thoma\Documents\Git\TypesEditor\TerrainTypeBuilder\obj\Debug\TerrainTypeBuilder.exe
 C:\Users\thoma\Documents\Git\TypesEditor\TerrainTypeBuilder\obj\Debug\TerrainTypeBuilder.pdb
+C:\Users\thoma\Documents\Git\TypesEditor\TerrainTypeBuilder\obj\Debug\TerrainTypeBuilder.NeighboringTiles.resources

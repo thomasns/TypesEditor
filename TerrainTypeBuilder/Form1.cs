@@ -122,7 +122,11 @@ namespace TerrainTypeBuilder
                     addNewType();
             }
             else
+            {
                 addNewType();
+                neighborsButton.Enabled = true;
+            }
+
         }
 
         private void addNewType()
@@ -231,6 +235,9 @@ namespace TerrainTypeBuilder
 
         public void Serialize(String path)
         {
+            foreach (TerrainType t in types)
+                t.prepForSerilization();
+
             StreamWriter sw = new StreamWriter(path);
             XmlSerializer serializer = new XmlSerializer(typeof(List<TerrainType>));
             serializer.Serialize(sw, types);
@@ -277,6 +284,21 @@ namespace TerrainTypeBuilder
             if (fd.ShowDialog() == DialogResult.OK)
                 Deserialize(fd.FileName);
                 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            NeighboringTiles nt = new NeighboringTiles();
+    
+            if(entity.neighborSprites != null)
+            {
+                nt.setNeighbors(entity.neighborSprites);
+            }
+
+            if(nt.ShowDialog() == DialogResult.OK)
+            {
+                entity.neighborSprites = new Dictionary<int, Tuple<int, int>>(nt.neighborSprites);
+            }
         }
     }
 }
