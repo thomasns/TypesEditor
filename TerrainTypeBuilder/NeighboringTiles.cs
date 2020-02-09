@@ -14,15 +14,190 @@ namespace TerrainTypeBuilder
     {
 
         public Dictionary<int, Tuple<int, int>> neighborSprites { get; set; }
+
+        CheckBox[] required;
+        CheckBox[] optional;
+        Bitmap bm = new Bitmap(@"C:\Users\thoma\Desktop\normalTiles.png");
         public NeighboringTiles()
         {
             neighborSprites = new Dictionary<int, Tuple<int, int>>();
             InitializeComponent();
+            required = new CheckBox[] { TLReq, TMReq, TRReq, MLReq, new CheckBox(), MRReq, BLReq, BMReq, BRReq };
+            optional = new CheckBox[] { topLeft, topMiddle, topRight, midLeft, new CheckBox(), midRight, bottomLeft, bottomMiddle, bottomRight };
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            findMatchingValues();
+             List<int> matchingValues = findMatchingValues();
+            foreach (int match in matchingValues)
+            {
+                Console.WriteLine(match);
+                if (neighborSprites.ContainsKey(match))
+                {
+                    //find pattern
+                    int val = match;
+                    bool[,] sets = new bool[3, 3];
+                    if (val >= 256)
+                    {
+                        sets[2, 2] = true;
+                        val -= 256;
+                    }
+                    if (val >= 128)
+                    {
+                        sets[2, 1] = true;
+                        val -= 128;
+                    }
+                    if (val >= 64)
+                    {
+                        sets[2, 0] = true;
+                        val -= 64;
+                    }
+                    if (val >= 32)
+                    {
+                        sets[1, 2] = true;
+                        val -= 32;
+                    }
+                    if (val >= 8)
+                    {
+                        sets[1, 0] = true;
+                        val -= 8;
+                    }
+                    if (val >= 4)
+                    {
+                        sets[0, 2] = true;
+                        val -= 4;
+                    }
+                    if (val >= 2)
+                    {
+                        sets[0, 1] = true;
+                        val -= 2;
+                    }
+                    if (val >= 1)
+                    {
+                        sets[0, 0] = true;
+                        val -= 1;
+                    }
+                    String pattern = "";
+                    for (int i = 0; i < 3; i++)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            if (i == 1 && j == 1)
+                            {
+                                pattern += "0";
+                            }
+                            if (sets[i, j] == true)
+                                pattern += "X";
+                            else pattern += '-';
+                        }
+                        pattern += "\n";
+                    }
+
+
+
+
+                    if (neighborSprites.ContainsKey(match))
+                    {
+                        ConflictForm cf = new ConflictForm();
+                        Rectangle grassRect = new Rectangle(3, 14, 16, 16);
+                        Rectangle waterRect = new Rectangle(20, 129, 16, 16);
+                        if (sets[0, 0])
+                        {
+                            cf.pictureBox1.Image = bm.Clone(waterRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                            cf.pictureBox10.Image = bm.Clone(waterRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                        }
+                        else
+                        {
+                            cf.pictureBox1.Image = bm.Clone(grassRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                            cf.pictureBox10.Image = bm.Clone(grassRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                        }
+                        if (sets[0, 1])
+                        {
+                            cf.pictureBox2.Image = bm.Clone(waterRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                            cf.pictureBox11.Image = bm.Clone(waterRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                        }
+                        else
+                        {
+                            cf.pictureBox2.Image = bm.Clone(grassRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                            cf.pictureBox11.Image = bm.Clone(grassRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                        }
+                        if (sets[0, 2])
+                        {
+                            cf.pictureBox3.Image = bm.Clone(waterRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                            cf.pictureBox12.Image = bm.Clone(waterRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                        }
+                        else
+                        {
+                            cf.pictureBox3.Image = bm.Clone(grassRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                            cf.pictureBox12.Image = bm.Clone(grassRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                        }
+                        if (sets[1, 0])
+                        {
+                            cf.pictureBox4.Image = bm.Clone(waterRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                            cf.pictureBox13.Image = bm.Clone(waterRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                        }
+                        else
+                        {
+                            cf.pictureBox4.Image = bm.Clone(grassRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                            cf.pictureBox13.Image = bm.Clone(grassRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                        }
+                        if (sets[1, 2])
+                        {
+                            cf.pictureBox6.Image = bm.Clone(waterRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                            cf.pictureBox15.Image = bm.Clone(waterRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                        }
+                        else
+                        {
+                            cf.pictureBox6.Image = bm.Clone(grassRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                            cf.pictureBox15.Image = bm.Clone(grassRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                        }
+                        if (sets[2, 0])
+                        {
+                            cf.pictureBox7.Image = bm.Clone(waterRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                            cf.pictureBox16.Image = bm.Clone(waterRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                        }
+                        else
+                        {
+                            cf.pictureBox7.Image = bm.Clone(grassRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                            cf.pictureBox16.Image = bm.Clone(grassRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                        }
+                        if (sets[2, 1])
+                        {
+                            cf.pictureBox8.Image = bm.Clone(waterRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                            cf.pictureBox17.Image = bm.Clone(waterRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                        }
+                        else
+                        {
+                            cf.pictureBox8.Image = bm.Clone(grassRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                            cf.pictureBox17.Image = bm.Clone(grassRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                        }
+                        if (sets[2, 2])
+                        {
+                            cf.pictureBox9.Image = bm.Clone(waterRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                            cf.pictureBox18.Image = bm.Clone(waterRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                        }
+                        else
+                        {
+                            cf.pictureBox9.Image = bm.Clone(grassRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                            cf.pictureBox18.Image = bm.Clone(grassRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                        }
+                        Rectangle replacmentRect = new Rectangle((int)spriteX.Value, (int)spriteY.Value, 16, 16);
+                        Rectangle existingRect = new Rectangle((int)neighborSprites[match].Item1, (int)neighborSprites[match].Item2, 16, 16);
+                        cf.pictureBox5.Image = bm.Clone(existingRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                        cf.pictureBox14.Image = bm.Clone(replacmentRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+
+                        if(cf.ShowDialog() == DialogResult.OK)
+                        {
+                            neighborSprites[match] = new Tuple<int, int>((int)spriteX.Value, (int)spriteY.Value);
+                        }
+                        continue;
+                    }
+                }
+
+                neighborSprites.Add(match, new Tuple<int, int>((int)spriteX.Value, (int)spriteY.Value));
+                listBox1.Items.Add(new spriteDataHolder(match, (int)spriteX.Value, (int)spriteY.Value));
+            }
+
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -32,117 +207,75 @@ namespace TerrainTypeBuilder
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            listBox1.Items.Add("new item");
-            listBox1.SelectedIndex = listBox1.Items.Count - 1;
+            spriteY.Value += 17;
         }
 
-        private void findMatchingValues()
-        {
-            if (requireAll.Checked)
-            {
-                int matchingValue = findFullMatchingValue();
-                neighborSprites.Add(matchingValue, new Tuple<int, int>((int)spriteX.Value, (int)spriteY.Value));
-                listBox1.Items.Add(new spriteDataHolder(matchingValue,(int)spriteX.Value,(int)spriteY.Value));
-            }
 
-            else
+
+        private List<int> findMatchingValues()
+        {
+            List<int> matchingValues = new List<int>();
+            int baseValue = 0;
+
+            for (int i = 0; i < 9; i++)
             {
-                int totalEnabled = countEnabled();
-                if (totalEnabled == 2)
+                if (i == 4)
+                    continue;
+                if (required[i].Checked)
+                    baseValue += (int)Math.Pow(2, i);
+            }
+            if (baseValue > 0)
+                matchingValues.Add(baseValue);
+            //Find all possible sums of different values in the list. 
+            List<int> optionalValues = new List<int>();
+            for (int i = 0; i < 9; i++)
+            {
+                if (i == 4)
+                    continue;
+                if (optional[i].Checked)
+                    optionalValues.Add((int)Math.Pow(2, i));
+            }
+            bool[] use = new bool[optionalValues.Count];
+            for (int i = 0; i < use.Count() - 1; i++)
+                use[i] = false;
+            if(use.Count() > 0)
+                use[use.Count() - 1] = true;
+            while(true)
+            {
+                bool done = true;
+                for(int j = 0; j < use.Count(); j++)
                 {
-                    //Find totalValueFirst
-                    int matchingValue = findFullMatchingValue();
-                    neighborSprites.Add(matchingValue, new Tuple<int, int>((int)spriteX.Value, (int)spriteY.Value));
-                    listBox1.Items.Add(new spriteDataHolder(matchingValue, (int)spriteX.Value, (int)spriteY.Value));
-                    //Now the rest (i think it could only ever be direct connections. )
-                    if (topMiddle.Checked)
+                    if (use[j] == false)
+                        done = false;
+                }
+                int addedValue = baseValue;
+                for (int j = 0; j < use.Count(); j++)
+                {
+                    Console.Write((use[j]) ? "1" : "0");
+                    if (use[j])
+                        addedValue += optionalValues[j];
+                }
+                Console.WriteLine();
+                matchingValues.Add(addedValue);
+                
+                for(int j = use.Count() -1; j >= 0; j--)
+                {
+                    if(j == use.Count() -1) 
+                        use[j] = !use[j];
+                    else
                     {
-                        neighborSprites.Add(2, new Tuple<int, int>((int)spriteX.Value, (int)spriteY.Value));
-                        listBox1.Items.Add(new spriteDataHolder(2, (int)spriteX.Value, (int)spriteY.Value));
-                    }
-                    if (midLeft.Checked)
-                    {
-                        neighborSprites.Add(8, new Tuple<int, int>((int)spriteX.Value, (int)spriteY.Value));
-                        listBox1.Items.Add(new spriteDataHolder(8, (int)spriteX.Value, (int)spriteY.Value));
-                    }
-                    if (midRight.Checked)
-                    { 
-                        neighborSprites.Add(32, new Tuple<int, int>((int)spriteX.Value, (int)spriteY.Value));
-                        listBox1.Items.Add(new spriteDataHolder(32, (int)spriteX.Value, (int)spriteY.Value));
-                    }
-                    if (bottomMiddle.Checked)
-                    {
-                        neighborSprites.Add(128, new Tuple<int, int>((int)spriteX.Value, (int)spriteY.Value));
-                        listBox1.Items.Add(new spriteDataHolder(128, (int)spriteX.Value, (int)spriteY.Value));
+                        if (use[j + 1] == false)
+                        {
+                            use[j] = !use[j];
+                        }
+                        else
+                            break;
                     }
                 }
-                else
-                {
-                        MessageBox.Show("Sorry, must have exactly two neighbors selected", "Error", MessageBoxButtons.OK);
-                }
-
+                if (done)
+                    break;
             }
-        }
-
-        private int countEnabled()
-        {
-            int countEnabled = 0;
-            {
-                if (topLeft.Checked)
-                    countEnabled++;
-                if (topMiddle.Checked)
-                    countEnabled++;
-                if (topRight.Checked)
-                    countEnabled++;
-                if (midLeft.Checked)
-                    countEnabled++;
-                if (midRight.Checked)
-                    countEnabled++;
-                if (bottomLeft.Checked)
-                    countEnabled++;
-                if (bottomMiddle.Checked)
-                    countEnabled++;
-                if (bottomRight.Checked)
-                    countEnabled++;
-            }
-
-            return countEnabled;
-        }
-
-        private int findFullMatchingValue()
-        {
-            int matchingValue = 0;
-            if (requireAll.Checked)
-            {
-                if (topLeft.Checked)
-                    matchingValue += 1;
-                if (topMiddle.Checked)
-                    matchingValue += 2;
-                if (topRight.Checked)
-                    matchingValue += 4;
-                if (midLeft.Checked)
-                    matchingValue += 8;
-                if (midRight.Checked)
-                    matchingValue += 32;
-                if (bottomLeft.Checked)
-                    matchingValue += 64;
-                if (bottomMiddle.Checked)
-                    matchingValue += 128;
-                if (bottomRight.Checked)
-                    matchingValue += 256;
-            }
-            else
-            {
-                if (topMiddle.Checked)
-                    matchingValue += 2;
-                if (midLeft.Checked)
-                    matchingValue += 8;
-                if (midRight.Checked)
-                    matchingValue += 32;
-                if (bottomMiddle.Checked)
-                    matchingValue += 128;
-            }
-            return matchingValue;
+            return matchingValues;
 
         }
 
@@ -156,15 +289,6 @@ namespace TerrainTypeBuilder
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (!requireAll.Checked)
-            {
-                onlyDirectNeighbors.Checked = true;
-                onlyDirectNeighbors.Enabled = false;
-            }
-            else
-            {
-                onlyDirectNeighbors.Enabled = true;
-            }
         }
 
         private void bottomLeft_CheckedChanged(object sender, EventArgs e)
@@ -190,12 +314,18 @@ namespace TerrainTypeBuilder
 
         private void spriteY_ValueChanged(object sender, EventArgs e)
         {
-
+            updateImage();
         }
 
         private void spriteX_ValueChanged(object sender, EventArgs e)
         {
+            updateImage();
+        }
 
+        private void updateImage()
+        {
+            Rectangle currentRect = new Rectangle((int)spriteX.Value, (int)spriteY.Value, 16, 16);
+            pictureBox1.Image = bm.Clone(currentRect, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -229,6 +359,173 @@ namespace TerrainTypeBuilder
                 return matchValue + ": " + spriteCoordinates.Item1 + "X" + spriteCoordinates.Item2;
             }
 
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void TLReq_CheckedChanged(object sender, EventArgs e)
+        {
+            if(TLReq.Checked)
+            {
+                topLeft.Checked = false;
+                topLeft.Enabled = false;
+            }
+            else
+                topLeft.Enabled = true;
+        }
+
+        private void TMReq_CheckedChanged(object sender, EventArgs e)
+        {
+            if (TMReq.Checked)
+            {
+                topMiddle.Checked = false;
+                topMiddle.Enabled = false;
+            }
+            else
+                topMiddle.Enabled = true;
+        }
+
+        private void TRReq_CheckedChanged(object sender, EventArgs e)
+        {
+            if (TRReq.Checked)
+            {
+                topRight.Checked = false;
+                topRight.Enabled = false;
+            }
+            else
+                topRight.Enabled = true;
+        }
+
+        private void MLReq_CheckedChanged(object sender, EventArgs e)
+        {
+            if (MLReq.Checked)
+            {
+                midLeft.Checked = false;
+                midLeft.Enabled = false;
+            }
+            else
+                midLeft.Enabled = true;
+        }
+
+        private void MRReq_CheckedChanged(object sender, EventArgs e)
+        {
+            if (MRReq.Checked)
+            {
+                midRight.Checked = false;
+                midRight.Enabled = false;
+            }
+            else
+                midRight.Enabled = true;
+
+        }
+
+        private void BLReq_CheckedChanged(object sender, EventArgs e)
+        {
+            if (BLReq.Checked)
+            {
+                bottomLeft.Checked = false;
+                bottomLeft.Enabled = false;
+            }
+            else
+                bottomLeft.Enabled = true;
+        }
+
+        private void BMReq_CheckedChanged(object sender, EventArgs e)
+        {
+            if (BMReq.Checked)
+            {
+                bottomMiddle.Checked = false;
+                bottomMiddle.Enabled = false;
+            }
+            else
+                bottomMiddle.Enabled = true;
+
+        }
+
+        private void BRReq_CheckedChanged(object sender, EventArgs e)
+        {
+            if (BRReq.Checked)
+            {
+                bottomRight.Checked = false;
+                bottomRight.Enabled = false;
+            }
+            else
+                bottomRight.Enabled = true;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (spriteX.Value >= 17 && spriteY.Value >= 17)
+            {
+                spriteX.Value -= 17;
+                spriteY.Value -= 17;
+            }
+
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (spriteY.Value >= 17)
+            {
+                spriteY.Value -= 17;
+            }
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (spriteX.Value < bm.Width-17 && spriteY.Value >= 17)
+            {
+                spriteX.Value += 17;
+                spriteY.Value -= 17;
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (spriteX.Value >= 17)
+            {
+                spriteX.Value -= 17;
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (spriteX.Value >= 17 && spriteY.Value < bm.Height - 17)
+            {
+                spriteX.Value -= 17;
+                spriteY.Value += 17;
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (spriteY.Value < bm.Height - 17)
+            {
+                spriteY.Value += 17;
+            }
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            if (spriteX.Value < bm.Height - 17 && spriteY.Value < bm.Height - 17)
+            {
+                spriteX.Value += 17;
+                spriteY.Value += 17;
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (spriteX.Value < bm.Width - 17)
+            {
+                spriteX.Value += 17;
+            }
         }
     }
 }
